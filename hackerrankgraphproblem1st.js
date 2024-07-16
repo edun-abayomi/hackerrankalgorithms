@@ -45,5 +45,31 @@ graph.addEdge(1,3);
 
 console.log(graph.adjacencyList);
 
+function findShortest (g_nodes,g_from,g_to,ids,val){
+
+    let graph = new graph();
+    // creating a graph data structure with all the nodes i was given
+
+    for(let i = 0;i <= g_nodes.length; i++){
+        graph.addVertex(i);
+    }
+
+    // creating edge connections to model the graph data structure i was given
+
+    for(let i  = 0; i<= g_from.length; i++){
+        let j = 0;
+
+        graph.addEdge(g_from[i],g_to[j]);
+
+        j++;
+
+    }
+
+
+    return -1
+
+    return counter
+}
+
 // use breath first search to look for the nodes with the color id in the val register.
 // return -1 if there is no pair or the single integer representing  the smallest path length.
