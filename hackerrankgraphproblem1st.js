@@ -41,7 +41,7 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
     let graph = new Graph();
     // creating a graph data structure with all the nodes i was given
 
-    for(let i = 0;i <= g_nodes; i++){
+    for(let i = 0;i < g_nodes; i++){
         graph.addVertex(i);
     }
 
