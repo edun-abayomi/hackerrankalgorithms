@@ -47,7 +47,7 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
 
     // creating edge connections to model the graph data structure i was given
 
-    for(let i  = 0; i<= g_from.length; i++){
+    for(let i  = 0; i< g_from.length; i++){
         let j = 0;
         graph.addEdge(g_from[i],g_to[j]);
         j++;
