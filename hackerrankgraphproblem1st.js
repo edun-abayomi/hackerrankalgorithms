@@ -38,10 +38,19 @@ bfs(start) {
 // then you have truly understood it
 function findShortest (g_nodes,g_from,g_to,ids,val){
 
+    let color_i_need = val;
+
+    // nc is NODE COLOR
+    const node_color = ids;
+
+    // i need some way to represent the node color on the graph nodes
+    // val contains the node color of all the nodes
+
     let graph = new Graph();
     // creating a graph data structure with all the nodes i was given
 
     for(let i = 0;i < g_nodes; i++){
+//
         graph.addVertex(i);
     }
 
@@ -59,6 +68,7 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
     // return -1
     //
     // return counter
+    console.log(graph.adjacencyList);
 }
 
 
