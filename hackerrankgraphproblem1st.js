@@ -38,10 +38,10 @@ bfs(start) {
 // then you have truly understood it
 function findShortest (g_nodes,g_from,g_to,ids,val){
 
-    let graph = new graph();
+    let graph = new Graph();
     // creating a graph data structure with all the nodes i was given
 
-    for(let i = 0;i <= g_nodes.length; i++){
+    for(let i = 0;i <= g_nodes; i++){
         graph.addVertex(i);
     }
 
@@ -52,8 +52,8 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
         graph.addEdge(g_from[i],g_to[j]);
         j++;
     }
-
-  graph.bfs(graph.adjacencyList);
+  //
+  // graph.bfs(graph.adjacencyList);
 
 
     // return -1
