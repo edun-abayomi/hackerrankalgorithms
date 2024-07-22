@@ -1,17 +1,18 @@
-
 class Graph {
-    constructor() {
-        this.adjacencyList = {};
+    constructor(v) {
+        this.V = v;
+        this.adj = new Array(v).fill(null)
+            .map(() => []);
     }
 
+    // Function to add an edge into the graph
+    addEdge(v, w) {
+        this.adj[v].push(w);
+    }
 
-addVertex(vertex) {
-    if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
-}
-addEdge(v1, v2) {
-    this.adjacencyList[v1].push(v2);
-    this.adjacencyList[v2].push(v1);
-}
+// addVertex(vertex) {
+//     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+// }
 
 // bfs(start_node,val,ids) {
 //     const queue = [start_node];
@@ -106,21 +107,21 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
     // i need some way to represent the node color on the graph nodes
     // val contains the node color of all the nodes
 
-    let graph = new Graph();
-    // creating a graph data structure with all the nodes i was given
+    // let graph = new Graph();
+    // // creating a graph data structure with all the nodes i was given
 
-    for(let i = 0;i < g_nodes; i++){
-//
-        graph.addVertex(i);
-    }
+//     for(let i = 0;i < g_nodes; i++){
+// //
+//         graph.addVertex(i);
+//     }
 
     // creating edge connections to model the graph data structure i was given
 
-    for(let i  = 0; i< g_from.length; i++){
-        let j = 0;
-        graph.addEdge(g_from[i],g_to[j]);
-        j++;
-    }
+    // for(let i  = 0; i< g_from.length; i++){
+    //     let j = 0;
+    //     graph.addEdge(g_from[i],g_to[j]);
+    //     j++;
+    // }
   //
   // graph.bfs(graph.adjacencyList);
 
@@ -128,7 +129,19 @@ function findShortest (g_nodes,g_from,g_to,ids,val){
     // return -1
     //
     // return counter
-    console.log(graph.adjacencyList);
+
+    let g = new Graph(4);
+
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    console.log("Following is Breadth First Traversal from all unvisited vertices:");
+    g.BFS();
+    console.log(g.adj);
 }
 
 
