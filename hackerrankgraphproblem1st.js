@@ -13,15 +13,44 @@ addEdge(v1, v2) {
     this.adjacencyList[v2].push(v1);
 }
 
-bfs(start_node) {
+bfs(start_node,val,ids) {
     const queue = [start_node];
+
+    /* when checking the start_node has been visited
+    also check the color of the start_node from the
+    ids array to see if it is the color_i_want (val)
+    when I see the color_i_want two times exit the loop
+    and return the distance counter or -1 if not color
+    was found
+     */
+
     const result = [];
+
+    const color_i_need = val;
+    const color_arr = ids;
+
+    let color_i_need_count = 0;
+    // when the color_i_need_count is two return the counter
+
+    let distance_counter = 0;
+    /* counting the weight from the  color_i_need at the start to the color
+     I need at the end */
+    
     const visited = {};
     visited[start_node] = true;
 
     while (queue.length !== 0) {
         let currentVertex = queue.shift();
+        /* The shift() method removes the first item of an array.
+        The shift() method changes the original array.
+         The shift() method returns the shifted element.
+         */
+
         result.push(currentVertex);
+
+        /* The push() method adds new items to the end of an array.
+         The push() method changes the length of the array.
+         */
 
         this.adjacencyList[currentVertex].forEach(neighbor => {
             if (!visited[neighbor]) {
