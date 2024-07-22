@@ -24,6 +24,11 @@ bfs(start_node,val,ids) {
     was found
      */
 
+    /* if on node 4 check ids at index 4 (ids[4]) to see if it is the color_i_need (val)
+       if on node 0 check ids at index 0 (ids[0]) to see if it is the color_i_need (val)
+       if on node 8 check ids at index 8 (ids[0]) to see if it is the color_i_need (val)
+     */
+
     const result = [];
 
     const color_i_need = val;
@@ -35,7 +40,7 @@ bfs(start_node,val,ids) {
     let distance_counter = 0;
     /* counting the weight from the  color_i_need at the start to the color
      I need at the end */
-    
+
     const visited = {};
     visited[start_node] = true;
 
