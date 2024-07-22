@@ -13,11 +13,11 @@ addEdge(v1, v2) {
     this.adjacencyList[v2].push(v1);
 }
 
-bfs(start) {
-    const queue = [start];
+bfs(start_node) {
+    const queue = [start_node];
     const result = [];
     const visited = {};
-    visited[start] = true;
+    visited[start_node] = true;
 
     while (queue.length !== 0) {
         let currentVertex = queue.shift();
