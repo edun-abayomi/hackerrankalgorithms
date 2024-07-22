@@ -63,6 +63,8 @@ bfs(start_node,val,ids) {
                 queue.push(neighbor);
             }
         });
+
+        /* so I have to change the iterative loop to a for loop that iterates from an index 0 to array.length */
     }
     return result;
 }
