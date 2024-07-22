@@ -19,7 +19,7 @@ bfs(start) {
     const visited = {};
     visited[start] = true;
 
-    while (queue.length) {
+    while (queue.length !== 0) {
         let currentVertex = queue.shift();
         result.push(currentVertex);
 
