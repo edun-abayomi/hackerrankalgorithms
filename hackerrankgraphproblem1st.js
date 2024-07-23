@@ -1,13 +1,13 @@
 class Graph {
-    constructor(v) {
-        this.V = v;
-        this.adj = new Array(v).fill(null)
+    constructor(vertex) {
+        this.vertex = vertex;
+        this.adjacencyList = new Array(vertex).fill(null)
             .map(() => []);
     }
 
     // Function to add an edge into the graph
     addEdge(v, w) {
-        this.adj[v].push(w);
+        this.adjacencyList[v].push(w);
     }
 
 //     /* when checking the start_node has been visited
@@ -41,9 +41,9 @@ class Graph {
 
     // Prints BFS traversal from all unvisited vertices
     BFS() {
-        let visited = new Array(this.V).fill(false);
+        let visited = new Array(this.vertex).fill(false);
 
-        for (let i = 0; i < this.V; ++i) {
+        for (let i = 0; i < this.vertex; ++i) {
             if (!visited[i]) {
                 let queue = [];
                 visited[i] = true;
@@ -52,7 +52,7 @@ class Graph {
                 while (queue.length !== 0) {
                     let s = queue.shift();
                     process.stdout.write(s + " ");
-                    for (let n of this.adj[s]) {
+                    for (let n of this.adjacencyList[s]) {
                         if (!visited[n]) {
                             visited[n] = true;
                             queue.push(n);
@@ -83,8 +83,8 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 
     console.log("Following is Breadth First Traversal from all unvisited vertices:");
     g.BFS();
-    console.log(g.adj);
+    console.log(g.adjacencyList);
 }
 
 
-// findShortest(10,[2,3,4,6],[5,4,2,6],[1,2,3,3,2,4,1,1,3,6],2);
+findShortest(10,[2,3,4,6],[5,4,2,6],[1,2,3,3,2,4,1,1,3,6],2);
