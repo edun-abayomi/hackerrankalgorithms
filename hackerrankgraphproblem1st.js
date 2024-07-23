@@ -49,21 +49,39 @@ class Graph {
         // the node_color_arr contains the color of each node from 1 to n
         let node_color_arr = ids;
 
+
+        // here the codes are being checked and
+        // passed into a queue.
         for (let i = 0; i < this.node; ++i) {
             if (!visited[i]) {
                 let queue = [];
                 visited[i] = true;
                 queue.push(i);
 
-                /* if on node 4 check ids at index 4 (ids[4]) to see if it is the color_i_need (val)
+                /* if on node 1 check ids at index 1 (ids[1]) to see if it is the color_i_need(val)
+
+                 if on node 4 check ids at index 4 (ids[4]) to see if it is the color_i_need (val)
+
          if on node 0 check ids at index 0 (ids[0]) to see if it is the color_i_need (val)
         if on node 8 check ids at index 8 (ids[0]) to see if it is the color_i_need (val)
        */
-    
+
+
+
+
+
+
 
                 while (queue.length !== 0) {
+
                     let s = queue.shift();
+                    // shift method removes from the first element of the array
+
+                    // this method was written to print out some characters with
+                    // the statement below process.stdout.write(s + " ");
+
                     process.stdout.write(s + " ");
+                    // might have to reorder the for loop below to one with a numbered index
                     for (let n of this.adjacencyList[s]) {
                         if (!visited[n]) {
                             visited[n] = true;
@@ -95,9 +113,9 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 
 
     console.log("Following is Breadth First Traversal from all unvisited vertices:");
-    g.BFS();
+    g.BFS(ids,val);
     console.log(g.adjacencyList);
 }
 
 
-findShortest(4,[0,0,1,2,2,3],[1,2,2,0,3,3],[1,2,3,3,2,4,1,1,3,6],2);
+findShortest(4,[0,0,1,2,2,3],[1,2,2,0,3,3],[1,2,3,2],2);
