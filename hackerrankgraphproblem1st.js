@@ -72,14 +72,20 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
     // nc is NODE COLOR
     const node_color = ids;
 
-    let g = new Graph(4);
+    let g = new Graph(g_nodes);
 
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
+ let j = 0;
+    for(let i = 0; i < g_from.length; i++){
+           g.addEdge(g_from[i],g_to[j]);
+        j++;
+    }
+
+    // g.addEdge(0, 1);
+    // g.addEdge(0, 2);
+    // g.addEdge(1, 2);
+    // g.addEdge(2, 0);
+    // g.addEdge(2, 3);
+    // g.addEdge(3, 3);
 
     console.log("Following is Breadth First Traversal from all unvisited vertices:");
     g.BFS();
@@ -87,4 +93,4 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 }
 
 
-findShortest(10,[2,3,4,6],[5,4,2,6],[1,2,3,3,2,4,1,1,3,6],2);
+findShortest(4,[0,0,1,2,2,3],[1,2,2,0,3,3],[1,2,3,3,2,4,1,1,3,6],2);
