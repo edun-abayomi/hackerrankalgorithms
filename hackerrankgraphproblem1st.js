@@ -43,6 +43,12 @@ class Graph {
     BFS(ids,val) {
         let visited = new Array(this.node).fill(false);
 
+        let color_i_need_count = 0;
+//     // when the color_i_need_count is two return the counter
+//
+         let distance_counter = 0;
+
+
         // val is the color i am searching for
         let color_i_need = val;
 
@@ -74,15 +80,20 @@ class Graph {
 
                 while (queue.length !== 0) {
 
-                    let s = queue.shift();
+                    let vertex = queue.shift();
                     // shift method removes from the first element of the array
 
                     // this method was written to print out some characters with
                     // the statement below process.stdout.write(s + " ");
 
-                    process.stdout.write(s + " ");
+                    process.stdout.write(vertex + " ");
+                  //  !!!**** IF STATEMENT GOES HERE ***!!!
+
+                    // it is printing out and marking the node as
+                    // visited in (this.adjacencyList[s]) below
+
                     // might have to reorder the for loop below to one with a numbered index
-                    for (let n of this.adjacencyList[s]) {
+                    for (let n of this.adjacencyList[vertex]) {
                         if (!visited[n]) {
                             visited[n] = true;
                             queue.push(n);
@@ -114,7 +125,8 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 
     console.log("Following is Breadth First Traversal from all unvisited vertices:");
     g.BFS(ids,val);
-    console.log(g.adjacencyList);
+
+    // console.log(g.adjacencyList);
 }
 
 
