@@ -1,7 +1,7 @@
 class Graph {
-    constructor(vertex) {
-        this.vertex = vertex;
-        this.adjacencyList = new Array(vertex).fill(null)
+    constructor(node) {
+        this.node = node;
+        this.adjacencyList = new Array(node).fill(null)
             .map(() => []);
     }
 
@@ -41,13 +41,19 @@ class Graph {
 
     // Prints BFS traversal from all unvisited vertices
     BFS() {
-        let visited = new Array(this.vertex).fill(false);
+        let visited = new Array(this.node).fill(false);
 
-        for (let i = 0; i < this.vertex; ++i) {
+        for (let i = 0; i < this.node; ++i) {
             if (!visited[i]) {
                 let queue = [];
                 visited[i] = true;
                 queue.push(i);
+
+                /* if on node 4 check ids at index 4 (ids[4]) to see if it is the color_i_need (val)
+         if on node 0 check ids at index 0 (ids[0]) to see if it is the color_i_need (val)
+        if on node 8 check ids at index 8 (ids[0]) to see if it is the color_i_need (val)
+       */
+
 
                 while (queue.length !== 0) {
                     let s = queue.shift();
@@ -80,12 +86,7 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
         j++;
     }
 
-    // g.addEdge(0, 1);
-    // g.addEdge(0, 2);
-    // g.addEdge(1, 2);
-    // g.addEdge(2, 0);
-    // g.addEdge(2, 3);
-    // g.addEdge(3, 3);
+
 
     console.log("Following is Breadth First Traversal from all unvisited vertices:");
     g.BFS();
