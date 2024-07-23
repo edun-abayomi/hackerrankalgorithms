@@ -40,8 +40,14 @@ class Graph {
 // }
 
     // Prints BFS traversal from all unvisited vertices
-    BFS() {
+    BFS(ids,val) {
         let visited = new Array(this.node).fill(false);
+
+        // val is the color i am searching for
+        let color_i_need = val;
+
+        // the node_color_arr contains the color of each node from 1 to n
+        let node_color_arr = ids;
 
         for (let i = 0; i < this.node; ++i) {
             if (!visited[i]) {
@@ -53,7 +59,7 @@ class Graph {
          if on node 0 check ids at index 0 (ids[0]) to see if it is the color_i_need (val)
         if on node 8 check ids at index 8 (ids[0]) to see if it is the color_i_need (val)
        */
-
+    
 
                 while (queue.length !== 0) {
                     let s = queue.shift();
