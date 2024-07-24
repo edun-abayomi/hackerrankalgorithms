@@ -40,13 +40,13 @@ class Graph {
 // }
 
     // Prints BFS traversal from all unvisited vertices
-    BFS(ids,val) {
+    BFS(ids, val) {
         let visited = new Array(this.node).fill(false);
 
         var color_i_need_count = 0;
 //     // when the color_i_need_count is two return the counter
 //
-         var distance_counter = 0;
+        var distance_counter = 0;
 
 
         // here the codes are being checked and
@@ -56,7 +56,6 @@ class Graph {
                 let queue = [];
                 visited[index] = true;
                 queue.push(index);
-
 
 
                 /* if on node 1          check ids at index 1 (ids[1]) to see if it is the color_i_need(val)
@@ -76,13 +75,7 @@ class Graph {
                     // the statement below process.stdout.write(s + " ");
 
                     // process.stdout.write(vertex + " ");
-                  //  !!!**** IF STATEMENT GOES HERE ***!!!
-
-
-
-
-
-
+                    //  !!!**** IF STATEMENT GOES HERE ***!!!
 
 
                     // it is printing out and marking the node as
@@ -95,7 +88,7 @@ class Graph {
                             visited[n] = true;
                             queue.push(n);
 
-                            if (val === ids[n]){
+                            if (val === ids[n]) {
                                 color_i_need_count++;
                                 // when the color_i_need_count is 2 exit and return the distance counter
                                 distance_counter++;
@@ -103,17 +96,21 @@ class Graph {
 
                             }
 
-                            if (color_i_need_count === 2){
+                            if (color_i_need_count === 2) {
                                 // that means matching colors have been found
-                                return  distance_counter;
+                                return distance_counter;
 
+                            }
+
+                            if (color_i_need_count === 0) {
+                                return -1;
                             }
                         }
                     }
 
 
                 }
-                 console.log(distance_counter);
+                console.log(distance_counter);
                 return distance_counter;
 
             }
@@ -131,19 +128,18 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 
     let g = new Graph(g_nodes);
 
- let j = 0;
-    for(let i = 0; i < g_from.length; i++){
-           g.addEdge(g_from[i],g_to[j]);
+    let j = 0;
+    for (let i = 0; i < g_from.length; i++) {
+        g.addEdge(g_from[i], g_to[j]);
         j++;
     }
 
 
-
     // console.log("Following is Breadth First Traversal from all unvisited vertices:");
-    g.BFS(ids,val);
+    g.BFS(ids, val);
 
     // console.log(g.adjacencyList);
 }
 
 
-findShortest(4,[0,0,1,2,2,3],[1,2,2,0,3,3],[1,2,3,2],2);
+findShortest(4, [0, 0, 1, 2, 2, 3], [1, 2, 2, 0, 3, 3], [1, 2, 3, 2], 2);
