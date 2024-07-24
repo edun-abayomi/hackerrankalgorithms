@@ -83,27 +83,31 @@ class Graph {
 
                     // might have to reorder the for loop below to one with a numbered index
                     // marking the vertex as visited so that i don't get lost in the maze
-                    for (let n of this.adjacencyList[vertex]) {
-                        if (!visited[n]) {
-                            visited[n] = true;
-                            queue.push(n);
+                    for (let node of this.adjacencyList[vertex]) {
+                        if (!visited[node]) {
+                            visited[node] = true;
+                            queue.push(node);
 
-                            if (val === ids[n]) {
+                            if (val === ids[node]) {
                                 color_i_need_count++;
                                 // when the color_i_need_count is 2 exit and return the distance counter
                                 distance_counter++;
+                                // if color_i_need_count is greater than one return distance counter
                                 console.log(distance_counter);
 
+                            } else {
+                                distance_counter = -1;
+                                console.log(distance_counter);
+                                return distance_counter
                             }
 
                             if (color_i_need_count === 2) {
                                 // that means matching colors have been found
                                 return distance_counter;
 
-                            }
-
-                            if (color_i_need_count === 0) {
-                                return -1;
+                            } else if (color_i_need_count === 0) {
+                                distance_counter = -1;
+                                return distance_counter;
                             }
                         }
                     }
@@ -142,4 +146,4 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
 }
 
 
-findShortest(4, [0, 0, 1, 2, 2, 3], [1, 2, 2, 0, 3, 3], [1, 2, 3, 2], 2);
+findShortest(4, [0, 0, 1, 2, 2, 3], [1, 2, 2, 0, 3, 3], [1, 6, 3, 4], 2);
