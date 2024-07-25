@@ -72,6 +72,7 @@ class Graph {
         }
     }
 }
+
 function findShortest(g_nodes, g_from, g_to, ids, val) {
     let g = new Graph(g_nodes);
     let j = 0;
@@ -82,4 +83,4 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
     g.BFS(ids, val);
 }
 
-findShortest(4, [1,1,4], [2,3,2], [1, 2, 1, 1], 1);
+findShortest(4, [1, 1, 4], [2, 3, 2], [1, 2, 1, 1], 1);
