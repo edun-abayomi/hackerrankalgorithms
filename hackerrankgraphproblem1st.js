@@ -1,8 +1,9 @@
 class Graph {
     constructor(node) {
         this.node = node;
-        this.adjacencyList = new Array(node).fill(null)
+        this.adjacencyList = new Array(node + 1).fill(null)
             .map(() => []);
+
     }
 
     // Function to add an edge into the graph
@@ -17,6 +18,7 @@ class Graph {
 // }
     // Prints BFS traversal from all unvisited vertices
     BFS(ids, val) {
+        this.adjacencyList.shift();
         let visited = new Array(this.node).fill(false);
         let color_i_need_count = 0;
 //     // when the color_i_need_count is two return the counter
