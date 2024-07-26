@@ -53,18 +53,19 @@ class Graph {
                                 distance_counter++;
                                 // if color_i_need_count is greater than one return distance counter
                                 console.log(distance_counter);
-                            } else {
-                                distance_counter = -1;
-                                console.log(distance_counter);
-                                return distance_counter
-                            }
-                            if (color_i_need_count === 2) {
+                                return distance_counter;
+                            }else if (color_i_need_count === 2) {
                                 // that means matching colors have been found
                                 return distance_counter;
                             } else if (color_i_need_count === 0) {
                                 distance_counter = -1;
                                 return distance_counter;
+                            } else {
+                                distance_counter = -1;
+                                console.log(distance_counter);
+                                return distance_counter
                             }
+
                         }
                     }
                 }
@@ -82,7 +83,7 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
         g.addEdge(g_from[i], g_to[j]);
         j++;
     }
-    g.BFS(ids, val);
+    return g.BFS(ids, val);
 }
 
 findShortest(4, [1, 1, 4], [2, 3, 2], [1, 2, 1, 1], 1);
