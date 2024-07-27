@@ -47,32 +47,39 @@ class Graph {
                             if (val === ids[node - 1] || color_i_need_count !== 0 ) {
                                 // if the color_i_need is equal to the color of the node edge in the  adjacency list
 
-                            if(val === ids[node - 1])  color_i_need_count++;
+                                if(val === ids[node - 1])  color_i_need_count++;
 
-                                distance_counter++;
+                              if(color_i_need_count < 2)  distance_counter++;
 
-                                console.log(distance_counter);
+                                // console.log(distance_counter);
 
                                 // return distance_counter;
                                 if (color_i_need_count === 2) return distance_counter;
 
+                            } else if (val === ids[vertex + 1] && color_i_need_count < 2){
+                                color_i_need_count++;
+                                distance_counter++;
+                                // console.log(distance_counter);
+                                if (color_i_need_count === 2) return distance_counter;
                             }
 
                         }
                     }
 
-                    if (color_i_need_count === 0) {
 
-                        distance_counter = -1;
-
-                        return distance_counter;
-
-                    }
                 }
-                console.log(distance_counter);
+                // console.log(distance_counter);
 
-                return distance_counter;
+                // return distance_counter;
             }
+        }
+
+        if (color_i_need_count === 0 ) {
+
+            distance_counter = -1;
+
+            return distance_counter;
+
         }
     }
 }
@@ -90,7 +97,10 @@ function findShortest(g_nodes, g_from, g_to, ids, val) {
         j++;
 
     }
+    // console.log(g.BFS(ids,val));
     return g.BFS(ids, val);
+
 }
 
-findShortest(5, [1, 1, 2, 3], [2, 3, 4, 5], [1, 2, 3, 3, 2], 2);
+// findShortest(5, [1, 1, 2, 3], [2, 3, 4, 5], [1, 2, 3, 3, 2], 2);
+findShortest(4, [1, 1, 4], [2, 3, 2], [1, 2, 1,1], 1);
