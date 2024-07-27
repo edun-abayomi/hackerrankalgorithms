@@ -56,7 +56,7 @@ class Graph {
                                 // return distance_counter;
                                 if (color_i_need_count === 2) return distance_counter;
 
-                            } else if (val === ids[vertex + 1] && color_i_need_count < 2){
+                            } else if (val === ids[vertex] && color_i_need_count < 2){
                                 color_i_need_count++;
                                 distance_counter++;
                                 // console.log(distance_counter);
