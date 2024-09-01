@@ -7,12 +7,35 @@ class Graph {
 
 
 
+    addVertex(vertex){
+        this.adjacencyList.set(vertex,[]);
+    }
+
     addEdge(vertex, edge){
         this.adjacencyList[vertex].push(edge);
     }
 
 
-    BFS(){
+    bfs(startingNode){
+        let visited = new Array(this.V).fill(false);
+        let queue = [];
+
+        visited[startingNode] = true;
+        queue.push(startingNode);
+
+        while(queue.length !== 0){
+            let currentNode = queue.shift();
+            console.log(currentNode);
+
+            let neighbors = this.adjacencyList.get(currentNode);
+            for (let i in neighbors){
+                let neighbor = neighbors[i];
+                if(!visited[neighbor]){
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            }
+        }
 
     }
     calculate_distances(graph_input){
