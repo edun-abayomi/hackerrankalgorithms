@@ -1,24 +1,27 @@
 /* hacker rank problem 2 */
 class Graph {
     constructor(node){
-        this.adjacencyList = {};
+        this.adjacencyList = new Array(node + 1).fill(null).map(() => []);
         this.node = node;
     }
 
 
 
     addEdge(vertex, edge){
-
-    }
-
-    addVertex(vertex){
-
+        this.adjacencyList[vertex].push(edge);
     }
 
 
+    BFS(){
 
-    shortest_path(graph){
+    }
+    calculate_distances(graph_input){
 
+
+
+
+        // return distance_array
+        return
     }
 
 

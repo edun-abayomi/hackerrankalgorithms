@@ -1,5 +1,5 @@
 class Graph {
-    constructor(node)   {
+    constructor(node) {
         this.node = node;
         this.adjacencyList = new Array(node + 1).fill(null)
             .map(() => []);
@@ -13,7 +13,7 @@ class Graph {
         let color_i_need_count = 0;
         let distance_counter = 0;
         for (let index = 0; index < this.node; index++) {
-            if (visited[index] === false) {
+            if (!visited[index]) {
                 let queue = [];
                 visited[index] = true;
                 queue.push(index);
@@ -21,15 +21,9 @@ class Graph {
                     let vertex = queue.shift();
                     if(this.adjacencyList[vertex] === undefined || this.adjacencyList[vertex] === null) return distance_counter;
                     for (let node of this.adjacencyList[vertex]) {
-                        if (visited[node] === false) {
+                        if (!visited[node]) {
                             visited[node] = true;
                             queue.push(node);
-
-                            // there needs to be some code to count
-                            // from the two colors that i found
-                            // in the adjacency List
-
-
                             if (val === ids[node - 1] || color_i_need_count !== 0 ) {
                                 // if the color_i_need is equal to the color of the node edge in the  adjacency list
                                 if(val === ids[node - 1])  color_i_need_count++;
@@ -37,13 +31,8 @@ class Graph {
                                 // console.log(distance_counter);
                                 // return distance_counter;
                                 if (color_i_need_count === 2) return distance_counter;
-                                if (color_i_need_count === 2) {
-                                    /// count from the first color i need to the second one
 
-                                    
-                                }
-
-
+                            } else if (val === ids[vertex + 1] && color_i_need_count < 2){
                             } else if (val === ids[vertex] && color_i_need_count < 2){
                                 color_i_need_count++;
                                 distance_counter++;
