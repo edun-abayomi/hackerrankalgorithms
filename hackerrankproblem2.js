@@ -17,7 +17,7 @@ class Graph {
 
 
     bfs(startingNode){
-        let visited = new Array(this.V).fill(false);
+        let visited = new Array(this.node).fill(false);
         let queue = [];
 
         visited[startingNode] = true;
@@ -44,7 +44,7 @@ class Graph {
 
 
         // return distance_array
-        return
+        
     }
 
 
