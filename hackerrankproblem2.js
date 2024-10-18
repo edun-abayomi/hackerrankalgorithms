@@ -18,46 +18,70 @@ class Graph {
     // utility function to detect cycle in a directed graph
 
 
-    isCyclicUtil(adj, u, visited, recStack) {
-        if (!visited[u]) {
+    isGraphCyclic(adj_list, current_node, visited, working_stack) {
+        if (!visited[current_node]) {
             // mark the current node as visited and part of recursion stack
 
-            visited[u] = true;
-            recStack[u] = true;
+            visited[current_node] = true;
+            working_stack[current_node] = true;
 
-            // Recur for all the vertices adjacent to this vertex
+            // Recursive call for all the vertices adjacent to this vertex
 
-            for (const x of adj[u]) {
-                if (!visited[x] && this.isCyclicUtil(adj, x, visited, recStack)) {
+            for (const node of adj_list[current_node]) {
+                if (!visited[node] && this.isGraphCyclic(adj_list, node, visited, working_stack)) {
                     return true;
-                } else if (recStack[x]) {
+                } else if (working_stack[node]) {
                     return true;
                 }
             }
         }
 
         // Remove the vertex from recursion stack
-        recStack[u] = false;
+        working_stack[current_node] = false;
         return false;
     }
 
 
-
     // function to detect cycle in a directed graph
-    isCyclic(adj,V){
-        const visited = new Array(V).fill(false);
-        const recStack = new Array(V).fill(false);
+    isCyclic(adj_list, vertex) {
+        const visited = new Array(vertex).fill(false);
+        const working_stack = new Array(vertex).fill(false);
 
         // call the recursive helper function to detect cycle in different DFS trees
 
-        for(let i = 0; i < V; i++){
-            if(!visited[i] && this.isCyclicUtil(adj,i,visited,recStack)){
+        for (let i = 0; i < vertex; i++) {
+            if (!visited[i] && this.isGraphCyclic(adj_list, i, visited, working_stack)) {
                 return true;
             }
         }
         return false;
     }
 
-    // example usage
 
+}
+
+
+const no_of_vertex = 7; // number of vertex in the graph
+
+
+// {  const adj = Array.from({length: V}, () => []);  } //  a predefined adjacency_list
+
+
+let g = new Graph(no_of_vertex);
+
+// adding edges to the graph
+
+g.addEdge(0, 1);
+g.addEdge(0, 2);
+g.addEdge(1, 2);
+g.addEdge(2, 0);
+g.addEdge(2, 3);
+g.addEdge(3, 3);
+
+// method call
+// created a new graph object from the graph class and call the method isCyclic on it (passing two arguments the adjacency_list and the no of vertex)
+if (g.isCyclic(g.adjacencyList, no_of_vertex)) {
+    console.log("contains cycle");
+} else {
+    console.log("No cycle");
 }
