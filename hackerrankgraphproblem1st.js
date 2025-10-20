@@ -52,7 +52,7 @@ class Graph {
         }
     }
 }
-function findShortest(g_nodes, g_from, g_to, ids, val) {
+function findShortest(g_nodes, g_from, g_to, ids, val)  {
     let g = new Graph(g_nodes);
     let j = 0;
     for (let i = 0; i < g_from.length; i++) {

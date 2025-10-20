@@ -3,14 +3,16 @@ build libraries and roads
 give all citizens of hacker land access to a library
 with the minimum cost */
 
-class Graph {
+// think of variables as registers
+
+class Graph {   
     constructor(node) {
         this.node = node;
         this.adjacencyList = new Array(node).fill(null).map(() => []);
         // hashmap data structure that holds the graph data.
     }
 
-    addEdge(u, v) {
+    addEdge(u, v) {  
         this.adjacencyList[u].push(v);
         // method to add vertex to the graph
     }
