@@ -48,6 +48,17 @@ class Graph {
     }
 }
 
+const g = new Graph(5);
+g.addEdge(0, 1);
+g.addEdge(1, 2);
+g.addEdge(2, 0);
+g.addEdge(1, 3);
+g.addEdge(3, 4);
+g.addEdge(4, 1);
+
+
+// output = Cycles: [ [ 1, 2, 0 ], [ 1, 3, 4 ] ]
+
 /* in the code, [...path, neighbor] is using a feature called spread syntax (or spread operator) in javascript
   the ... symbol is the spread operator, which "unpacks" the elements of the path array and creates a new
   array with those elements, followed by the neighbor element.
@@ -89,4 +100,56 @@ the code a bit.
 *
 *   */
 
+/* The map function above is used to create an array of empty arrays.
+
+Array(vertices): Create an array with vertices number of elements, all initiated to undefined.
+Example Array(3) => [undefined, undefined, undefined]
+
+fill(): Fill the array with a value (in this case, undefined by default)
+Example: [undefined, undefined, undefined] (no change, since its already undefined).
+
+map(() => []): Transforms each element of the array into an empty array[].
+  map function creates a new array by applying the provided callback function to each element.
+  () => [] is an arrow function that returns an empty array [] for each element.
+
+  So , Array(vertices).fill().map(() => []) creates an array of vertices number of empty arrays:
+  Example: vertices = 3 => [[],[],[]]
+  This is equivalent to
+  let adjList = [];
+  for (let i = 0; i < vertices; i++) {
+        adjList.push([]);
+        }
+
+        using map is a concise way to create an array of arrays, which is useful for representing an
+        adjacency list in a graph data structure.
+*
+*
+*   */
+
+
+/*() => [] is an arrow function that takes no arguments(hence the empty parenthesis ()) and returns
+an empty array [].
+
+Here's a breakdown:
+   (): The input parameters of the arrow function (in this case,none)
+   =>: The arrow function syntax
+   []: The return value of the arrow function(an empty array)
+
+   it is equivalent to writing :
+
+   function() {
+   return [];
+   }
+
+   or with an explicit return statement:
+
+   () => {
+   return [];
+   }
+
+   The concise version () => [] is a common pattern when you want to return a value immediately, without
+   needing a function body.
+   In the context of Array(vertices).fill().map(() => []), it's used to create an array of empty arrays.
+*
+*  */
 
