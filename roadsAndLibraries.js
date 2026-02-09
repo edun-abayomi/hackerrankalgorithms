@@ -1,12 +1,4 @@
 // Road and Libraries Algorithmic problem Attempt One
-
-
-//   PSEUDOCODE
-/*  1) SEARCH for cycles and don't repair a road that creates a cycle
-*   2) if the cost of a road is (>) greater than the cost of a library ... build only Libraries
-*   3) if the cost of a library is (>) greater than the cost of a road ... build only one library, and the rest should be roads
-*
-*   */
 class Graph {
     constructor(vertices) {
         this.V = vertices; // Number of vertices
@@ -104,3 +96,43 @@ g.removeVertex(2); // Remove vertex 2
 
 console.log("Graph after removing vertex 2:", g.adjList);
 console.log("New number of vertices:", g.V);
+
+
+function roadsAndLibraries(n, c_lib, c_road, cities) {
+    let min_cost = 0;
+    if(c_lib === c_road){
+         min_cost = c_lib * n;
+        return min_cost;
+    }else if(c_lib < c_road){
+        min_cost = c_lib * n;
+        return min_cost;
+    }
+
+}
+
+
+//   PSEUDOCODE
+/*  1) SEARCH for cycles and don't repair a road that creates a cycle
+*   2) if the cost of a road is (>) greater than the cost of a library ... build only Libraries
+*   3) if the cost of a library is (>) greater than the cost of a road ... build only one library, and the rest should be roads
+*   4) to keep the cost low don't repair a road that creates a cycle.
+*   5) if the cost of the road is equal to the cost of the library ... build only libraries.
+*   */
+
+
+
+/*
+if the price of road is lower than the price of libraries
+	build only one library and repair the roads but don't repair a road that creates a cycle
+
+if the price of library is lower than the price of road,
+	build all libraries and no roads
+
+if the price of library 	 and roads is equal,
+build all libraries
+
+if you found a cycle don't repair it,
+repairing a cycle  will increase the cost
+
+
+ removing one edge or not repairing one road will stop the cycles */
