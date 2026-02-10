@@ -37,7 +37,7 @@ class Graph {
             if (!visited[neighbor]) {
                 // Recur for an unvisited neighbor
                 this.dfs(neighbor, visited, recStack, cycles, node, [...path, neighbor], uniqueCycleSignatures);
-            } else if (recStack[neighbor] && neighbor!== parent) {
+            } else if (recStack[neighbor] && neighbor !== parent) {
                 // Back-edge detected, cycle found!
                 // 'neighbor' is the node that closes the cycle.
                 // 'path' currently holds the nodes from the start of DFS up to 'node'.
@@ -56,7 +56,7 @@ class Graph {
                 let minNodeIndex = currentCyclePath.indexOf(minNode);
 
                 // Rotate the cycle to start with the smallest node
-                if (minNodeIndex!== -1) {
+                if (minNodeIndex !== -1) {
                     canonicalCycle = currentCyclePath.slice(minNodeIndex, -1)
                         .concat(currentCyclePath.slice(0, minNodeIndex))
                         .concat(minNode); // Add minNode again to close
@@ -68,7 +68,7 @@ class Graph {
                 const signatureForward = canonicalCycle.join('-');
                 const signatureBackward = [...canonicalCycle.slice(0, -1)].reverse().concat(minNode).join('-');
 
-                if (!uniqueCycleSignatures.has(signatureForward) &&!uniqueCycleSignatures.has(signatureBackward)) {
+                if (!uniqueCycleSignatures.has(signatureForward) && !uniqueCycleSignatures.has(signatureBackward)) {
                     cycles.push(canonicalCycle);
                     uniqueCycleSignatures.add(signatureForward);
                     uniqueCycleSignatures.add(signatureBackward); // Add both directions as valid signatures
@@ -79,67 +79,116 @@ class Graph {
         // Remove the current node from the recursion stack
         recStack[node] = false;
     }
+
+    roadsAndLibraries(n, c_lib, c_road, cities) {
+        const g5 = new Graph(n);
+        for (let i = 0; i < cities.length; i++) {
+
+            g5.addEdge(cities[i][0], cities[i][1]);
+        }
+        let cycles = g5.findCycles();
+
+        let min_cost = 0;
+        if (c_lib === c_road) {
+            min_cost = c_lib * n;
+            return min_cost;
+        } else if (c_lib < c_road) {
+            min_cost = c_lib * n;
+            return min_cost;
+        } else if (c_road < c_lib) {
+            let newLength = cities.length;
+
+            function foundCycle() {
+                newLength = newLength - 1;
+            }
+
+            let loopCount = cycles.length;
+
+            for (let i = 1; i <= loopCount; i++) {
+                foundCycle();
+            }
+
+            min_cost = (c_road * newLength) + c_lib;
+            return min_cost;
+        }
+
+    }
 }
 
 // --- Test Cases ---
+// console.log("-- custom test case --");
+// const g5 = new Graph(5);
+// g5.addEdge(0, 1);
+// g5.addEdge(1, 2);
+// g5.addEdge(2, 3);
+// g5.addEdge(3, 0); // Cycle: 0-1-2-3-0
+// g5.addEdge(1, 3); // Also forms 0-1-3-0
+// g5.addEdge(1, 4);
+// g5.addEdge(4, 0); // Also forms 0-1-4-0let foundCycles = g0.findCycles();
+// let foundCycles = g5.findCycles();
+// g5.roadsAndLibraries(5, 2, 1, g5.adjList,foundCycles);
+//
+// console.log("Found cycles:", g5.findCycles());
+// console.log("\n");
 
-// Test 1: A simple graph with one triangle cycle
-console.log("--- Test Case 1: Simple Cycle ---");
-const g1 = new Graph(3);
-g1.addEdge(0, 1);
-g1.addEdge(1, 2);
-g1.addEdge(2, 0);
-console.log("Graph 1 Adjacency List:", g1.adjList);
-console.log("Found cycles:", g1.findCycles());
-console.log("\n");
 
-// Test 2: A graph with no cycles (a line)
-console.log("--- Test Case 2: No Cycle ---");
-const g2 = new Graph(4);
-g2.addEdge(0, 1);
-g2.addEdge(1, 2);
-g2.addEdge(2, 3);
-console.log("Graph 2 Adjacency List:", g2.adjList);
-console.log("Found cycles:", g2.findCycles());
-console.log("\n");
-
-// Test 3: A graph with two distinct cycles
-console.log("--- Test Case 3: Multiple Cycles ---");
-const g3 = new Graph(5);
-g3.addEdge(0, 1);
-g3.addEdge(1, 2);
-g3.addEdge(2, 0); // Cycle 1: 0-1-2-0
-g3.addEdge(2, 3);
-g3.addEdge(3, 4);
-g3.addEdge(4, 2); // Cycle 2: 2-3-4-2
-console.log("Graph 3 Adjacency List:", g3.adjList);
-console.log("Found cycles:", g3.findCycles());
-console.log("\n");
-
-// Test 4: A disconnected graph with a cycle in one component
-console.log("--- Test Case 4: Disconnected Graph with a Cycle ---");
-const g4 = new Graph(6);
-// Component 1 (with cycle)
-g4.addEdge(0, 1);
-g4.addEdge(1, 2);
-g4.addEdge(2, 0);
-// Component 2 (no cycle)
-g4.addEdge(3, 4);
-g4.addEdge(4, 5);
-console.log("Graph 4 Adjacency List:", g4.adjList);
-console.log("Found cycles:", g4.findCycles());
-console.log("\n");
-
-// Test 5: A more complex graph with overlapping cycles
-console.log("--- Test Case 5: Complex Graph ---");
-const g5 = new Graph(5);
-g5.addEdge(0, 1);
-g5.addEdge(1, 2);
-g5.addEdge(2, 3);
-g5.addEdge(3, 0); // Cycle: 0-1-2-3-0
-g5.addEdge(1, 3); // Also forms 0-1-3-0
-g5.addEdge(1, 4);
-g5.addEdge(4, 0); // Also forms 0-1-4-0
-console.log("Graph 5 Adjacency List:", g5.adjList);
-console.log("Found cycles:", g5.findCycles());
-console.log("\n")
+// // Test 1: A simple graph with one triangle cycle
+// console.log("--- Test Case 1: Simple Cycle ---");
+// const g1 = new Graph(3);
+// g1.addEdge(0, 1);
+// g1.addEdge(1, 2);
+// g1.addEdge(2, 0);
+// console.log("Graph 1 Adjacency List:", g1.adjList);
+// console.log("Found cycles:", g1.findCycles());
+// console.log("\n");
+//
+// // Test 2: A graph with no cycles (a line)
+// console.log("--- Test Case 2: No Cycle ---");
+// const g2 = new Graph(4);
+// g2.addEdge(0, 1);
+// g2.addEdge(1, 2);
+// g2.addEdge(2, 3);
+// console.log("Graph 2 Adjacency List:", g2.adjList);
+// console.log("Found cycles:", g2.findCycles());
+// console.log("\n");
+//
+// // Test 3: A graph with two distinct cycles
+// console.log("--- Test Case 3: Multiple Cycles ---");
+// const g3 = new Graph(5);
+// g3.addEdge(0, 1);
+// g3.addEdge(1, 2);
+// g3.addEdge(2, 0); // Cycle 1: 0-1-2-0
+// g3.addEdge(2, 3);
+// g3.addEdge(3, 4);
+// g3.addEdge(4, 2); // Cycle 2: 2-3-4-2
+// console.log("Graph 3 Adjacency List:", g3.adjList);
+// console.log("Found cycles:", g3.findCycles());
+// console.log("\n");
+//
+// // Test 4: A disconnected graph with a cycle in one component
+// console.log("--- Test Case 4: Disconnected Graph with a Cycle ---");
+// const g4 = new Graph(6);
+// // Component 1 (with cycle)
+// g4.addEdge(0, 1);
+// g4.addEdge(1, 2);
+// g4.addEdge(2, 0);
+// // Component 2 (no cycle)
+// g4.addEdge(3, 4);
+// g4.addEdge(4, 5);
+// console.log("Graph 4 Adjacency List:", g4.adjList);
+// console.log("Found cycles:", g4.findCycles());
+// console.log("\n");
+//
+// // Test 5: A more complex graph with overlapping cycles
+// console.log("--- Test Case 5: Complex Graph ---");
+// const g5 = new Graph(5);
+// g5.addEdge(0, 1);
+// g5.addEdge(1, 2);
+// g5.addEdge(2, 3);
+// g5.addEdge(3, 0); // Cycle: 0-1-2-3-0
+// g5.addEdge(1, 3); // Also forms 0-1-3-0
+// g5.addEdge(1, 4);
+// g5.addEdge(4, 0); // Also forms 0-1-4-0
+// console.log("Graph 5 Adjacency List:", g5.adjList);
+// console.log("Found cycles:", g5.findCycles());
+// console.log("\n")
