@@ -115,6 +115,32 @@ class Graph {
     }
 }
 
+function roadsAndLibraries(n, c_lib, c_road, cities) {
+    let min_cost = 0;
+    if(c_lib === c_road){
+        min_cost = c_lib * n;
+        return min_cost;
+    }else if(c_lib < c_road){
+        min_cost = c_lib * n;
+        return min_cost;
+    }else if(c_road < c_lib){
+        let newLength = cities.length;
+        function foundCycle(){
+            newLength = newLength - 1;
+        }
+
+       let loopCount = cycles.length ;
+
+        for(let i=1; i<=loopCount; i++){
+            foundCycle();
+        }
+
+        min_cost = (c_road * newLength) + c_lib;
+        return min_cost;
+    }
+
+}
+
 // --- Test Cases ---
 
 // Test 1: A simple graph with one triangle cycle
@@ -184,17 +210,7 @@ console.log("\n")
 
 
 
-function roadsAndLibraries(n, c_lib, c_road, cities) {
-    let min_cost = 0;
-    if(c_lib === c_road){
-         min_cost = c_lib * n;
-        return min_cost;
-    }else if(c_lib < c_road){
-        min_cost = c_lib * n;
-        return min_cost;
-    }
 
-}
 
 
 //   PSEUDOCODE
