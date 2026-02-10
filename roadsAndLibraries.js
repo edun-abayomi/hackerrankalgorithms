@@ -113,33 +113,49 @@ class Graph {
         // Remove the current node from the recursion stack
         recStack[node] = false;
     }
-}
 
-function roadsAndLibraries(n, c_lib, c_road, cities) {
-    let min_cost = 0;
-    if(c_lib === c_road){
-        min_cost = c_lib * n;
-        return min_cost;
-    }else if(c_lib < c_road){
-        min_cost = c_lib * n;
-        return min_cost;
-    }else if(c_road < c_lib){
-        let newLength = cities.length;
-        function foundCycle(){
-            newLength = newLength - 1;
+     roadsAndLibraries(n, c_lib, c_road, cities) {
+        let min_cost = 0;
+        if(c_lib === c_road){
+            min_cost = c_lib * n;
+            return min_cost;
+        }else if(c_lib < c_road){
+            min_cost = c_lib * n;
+            return min_cost;
+        }else if(c_road < c_lib){
+            let newLength = cities.length;
+            function foundCycle(){
+                newLength = newLength - 1;
+            }
+
+            let loopCount = cycles.length ;
+
+            for(let i=1; i<=loopCount; i++){
+                foundCycle();
+            }
+
+            min_cost = (c_road * newLength) + c_lib;
+            return min_cost;
         }
 
-       let loopCount = cycles.length ;
-
-        for(let i=1; i<=loopCount; i++){
-            foundCycle();
-        }
-
-        min_cost = (c_road * newLength) + c_lib;
-        return min_cost;
     }
-
 }
+
+
+
+
+
+console.log("-- custom test case --");
+const g0 = new Graph(5);
+g0.addEdge(0, 1);
+g0.addEdge(1, 2);
+g0.addEdge(2, 3);
+g0.addEdge(3, 4);
+let foundCycles = g0.findCycles();
+g0.roadsAndLibraries(5, 2, 1, g0.adjList);
+console.log("Graph 0 Adjacency List:", g0.adjList);
+console.log("Found cycles:", g0.findCycles());
+console.log("\n");
 
 // --- Test Cases ---
 

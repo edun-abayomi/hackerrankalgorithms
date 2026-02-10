@@ -80,56 +80,64 @@ class Graph {
         recStack[node] = false;
     }
 
-    roadsAndLibraries(n, c_lib, c_road, cities) {
-        const g5 = new Graph(n);
-        for (let i = 0; i < cities.length; i++) {
 
-            g5.addEdge(cities[i][0], cities[i][1]);
-        }
-        let cycles = g5.findCycles();
+}
 
-        let min_cost = 0;
-        if (c_lib === c_road) {
-            min_cost = c_lib * n;
-            return min_cost;
-        } else if (c_lib < c_road) {
-            min_cost = c_lib * n;
-            return min_cost;
-        } else if (c_road < c_lib) {
-            let newLength = cities.length;
+function roadsAndLibraries(n, c_lib, c_road, cities) {
+    const g5 = new Graph(n);
+    for (let i = 0; i < cities.length; i++) {
 
-            function foundCycle() {
-                newLength = newLength - 1;
-            }
-
-            let loopCount = cycles.length;
-
-            for (let i = 1; i <= loopCount; i++) {
-                foundCycle();
-            }
-
-            min_cost = (c_road * newLength) + c_lib;
-            return min_cost;
-        }
-
+        g5.addEdge(cities[i][0], cities[i][1]);
+        console.log("The city edges are below");
+        console.log(cities[i][0], cities[i][1]);
     }
+    let cycles = g5.findCycles();
+    console.log("The cycles found are",cycles);
+
+    let min_cost = 0;
+    console.log("The cycle length is",cycles.length);
+    console.log("The minimum cost is",min_cost);
+    if (c_lib === c_road) {
+        min_cost = c_lib * n;
+        return min_cost;
+    } else if (c_lib < c_road) {
+        min_cost = c_lib * n;
+        return min_cost;
+    } else if (c_road < c_lib) {
+        let newLength = cities.length;
+
+        function foundCycle() {
+            newLength = newLength - 1;
+        }
+
+        let loopCount = cycles.length;
+
+        for (let i = 1; i <= loopCount; i++) {
+            foundCycle();
+        }
+
+        min_cost = (c_road * newLength) + c_lib;
+        return min_cost;
+    }
+
 }
 
 // --- Test Cases ---
-// console.log("-- custom test case --");
-// const g5 = new Graph(5);
-// g5.addEdge(0, 1);
-// g5.addEdge(1, 2);
-// g5.addEdge(2, 3);
-// g5.addEdge(3, 0); // Cycle: 0-1-2-3-0
-// g5.addEdge(1, 3); // Also forms 0-1-3-0
-// g5.addEdge(1, 4);
-// g5.addEdge(4, 0); // Also forms 0-1-4-0let foundCycles = g0.findCycles();
-// let foundCycles = g5.findCycles();
-// g5.roadsAndLibraries(5, 2, 1, g5.adjList,foundCycles);
-//
-// console.log("Found cycles:", g5.findCycles());
-// console.log("\n");
+console.log("-- custom test case --");
+const g6 = new Graph(5);
+g6.addEdge(0, 1);
+g6.addEdge(1, 2);
+g6.addEdge(2, 3);
+g6.addEdge(3, 0); // Cycle: 0-1-2-3-0
+g6.addEdge(1, 3); // Also forms 0-1-3-0
+g6.addEdge(1, 4);
+g6.addEdge(4, 0); // Also forms 0-1-4-0let foundCycles = g0.findCycles();
+let foundCycles = g6.findCycles();
+// g6.roadsAndLibraries(5, 2, 1, [[0, 1], [1, 2], [2, 3], [3, 0], [1, 3], [1, 4], [4, 0]]);
+roadsAndLibraries(5, 2, 1, [[0, 1], [1, 2], [2, 3], [3, 0], [1, 3], [1, 4], [4, 0]]).call(g6);
+console.log("Graph 6 Adjacency List:", g6.adjList)
+console.log("Found cycles:", g6.findCycles());
+console.log("\n");
 
 
 // // Test 1: A simple graph with one triangle cycle
